@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="W.Views.WordGroupDetailPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:W.ViewModels"  
+             xmlns:model="clr-namespace:W.Models"  
+             x:Name="BrowseGroupPage">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Repeat" Command="{Binding RepeatCommand}" />
+        <ToolbarItem Text="Study" Command="{Binding StudyCommand}" />
+    </ContentPage.ToolbarItems>
+    
+    <!--
+      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+    -->
+    
+    <RefreshView x:DataType="local:WordGroupDetailViewModel" Command="{Binding LoadWordsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <CollectionView x:Name="ItemsListView"
+                ItemsSource="{Binding Words}"
+                SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="3" x:DataType="model:VocabularyItem">
+                        <Label Text="{Binding Word}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                               Padding="10"
+                            FontSize="16">
+                            
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding KnowledgeLevel}" Value="0">
+                                    <Setter Property="BackgroundColor" Value="White"/>
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding KnowledgeLevel}" Value="1">
+                                    <Setter Property="BackgroundColor" Value="Red"/>
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding KnowledgeLevel}" Value="2">
+                                    <Setter Property="BackgroundColor" Value="#BDE44A"/>
+                                </DataTrigger>
+                            </Label.Triggers>   
+                            
+                        </Label>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:WordGroupDetailViewModel}}, Path=WordTapped}"		
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>

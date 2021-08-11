@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="W.Views.WordDetailPage"
+             Title="{Binding Title}">
+
+    <StackLayout Spacing="20" Padding="15">
+
+        <StackLayout.GestureRecognizers>
+            <!-- Can also set a swipe threshold on each gesture recognizer -->
+            <SwipeGestureRecognizer Direction="Left" Command="{Binding NextCommand}"/>
+            <SwipeGestureRecognizer Direction="Right" Command="{Binding PreviousCommand}"/>
+        </StackLayout.GestureRecognizers>
+
+        <Label Text="{Binding Position}" FontSize="Medium" HorizontalTextAlignment="Center" />
+        <Label Text="{Binding Text}" FontSize="Large" HorizontalTextAlignment="Center" Margin="0,2"/>
+        <Label Text="{Binding Description}" FontSize="Large" LineBreakMode="WordWrap" HorizontalTextAlignment="Center" Margin="0,2"/>
+        <Button Text="Play" Command="{Binding PlayCommand}" HorizontalOptions="FillAndExpand"></Button>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Previous" Command="{Binding PreviousCommand}" HorizontalOptions="FillAndExpand"></Button>
+            <Button Text="Next" Command="{Binding NextCommand}" HorizontalOptions="FillAndExpand"></Button>
+        </StackLayout>
+    </StackLayout>
+    
+</ContentPage>

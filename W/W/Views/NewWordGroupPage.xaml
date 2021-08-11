@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="W.Views.NewWordGroupPage"
+             Shell.PresentationMode="ModalAnimated"
+             Title="New Group" IsBusy="{Binding IsBusy, Mode=TwoWay}">
+    
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding CancelCommand}"
+                            IconOverride="back.png" />
+    </Shell.BackButtonBehavior>
+    
+    <ContentPage.Content>
+        <StackLayout Spacing="3" Padding="15">
+
+            <StackLayout.GestureRecognizers>
+                <!-- Can also set a swipe threshold on each gesture recognizer -->
+                <SwipeGestureRecognizer Direction="Left" Command="{Binding AddCommand}"/>
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding KnowCommand}"/>
+            </StackLayout.GestureRecognizers>
+
+            <Label Text="{Binding Position}" FontSize="Medium" HorizontalTextAlignment="Center" />
+            <Label Text="{Binding Word}" FontSize="Medium" HorizontalTextAlignment="Center" />
+            <!--<Entry Text="{Binding Text, Mode=TwoWay}" FontSize="Medium" />-->
+            <Label Text="{Binding Translation}" FontSize="Medium" HorizontalTextAlignment="Center" />
+            <!--<Editor Text="{Binding Description, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />-->
+            <Button Text="Play" Command="{Binding PlayCommand}" HorizontalOptions="FillAndExpand"></Button>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Know" Command="{Binding KnowCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Add" Command="{Binding AddCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:W"
+             x:Class="W.MainPage">
+    <ContentPage.BindingContext>
+        <local:MainViewModel/>
+    </ContentPage.BindingContext>
+
+<StackLayout>
+        <StackLayout.GestureRecognizers>
+            <!-- Can also set a swipe threshold on each gesture recognizer -->
+            <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped" Command="{Binding SwipeCommand}" CommandParameter="Left"/>
+            <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped" Command="{Binding SwipeCommand}" CommandParameter="Right"/>
+        </StackLayout.GestureRecognizers>
+
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <Label Text="{Binding VocabularyWord}" FontSize="Title" Padding="30,10,30,10" HorizontalTextAlignment="Center" />
+        <Label Text="{Binding VocabularyTranslation}" FontSize="16" Padding="30,0,30,0" HorizontalTextAlignment="Center"/>
+        <Label FontSize="16" Padding="30,24,30,0">
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Button Text="Click me"  Clicked="OnButtonClicked" Command="{Binding ButtonCommand}"/>
+        <BoxView Color="{Binding BoxColor}" WidthRequest="200" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+
+        </BoxView>
+        <Label Text="{Binding Name}"/>
+        
+    </StackLayout>
+
+</ContentPage>
